@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CGPA Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="theme-toggle" onclick="toggleTheme()">☼</div>
+<div class="calculator">
+  <h2>CGPA Calculator</h2>
+
+  <label for="completedCredits">Completed Credit Hours</label>
+  <input type="number" id="completedCredits" placeholder="e.g. 90" />
+
+  <label for="previousCGPA">Previous CGPA</label>
+  <input type="number" step="0.01" id="previousCGPA" placeholder="e.g. 3.25" />
+
+  <label for="courseCount">Number of Courses This Semester</label>
+  <input type="number" id="courseCount" placeholder="e.g. 5" />
+
+  <button onclick="generateInputs()">Generate Course Inputs</button>
+
+  <div id="courseInputs" style="margin-top: 20px;"></div>
+
+  <button onclick="calculateCGPA()">Calculate Updated CGPA</button>
+
+  <div id="result">Your updated CGPA will appear here</div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
