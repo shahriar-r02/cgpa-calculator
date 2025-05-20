@@ -33,16 +33,35 @@ function calculateCGPA() {
 
     let newCredits = 0;
     let totalGradePoints = 0;
+    let errorMessage = "";
 
-    inputs.forEach(row => {
+    inputs.forEach((row, index) => {
         const credit = parseFloat(row.children[1].value);
         const gpa = parseFloat(row.children[2].value);
 
-        if (!isNaN(credit) && !isNaN(gpa)) {
-            newCredits += credit;
-            totalGradePoints += credit * gpa;
+        if (isNaN(credit) || isNaN(gpa)) {
+            errorMessage = `Please enter valid credit and GPA for Course ${index + 1}.`;
+            return;
         }
+
+        if (credit < 1 || credit > 5) {
+            errorMessage = `Credit for Course ${index + 1} must be between 1 and 5.`;
+            return;
+        }
+
+        newCredits += credit;
+        totalGradePoints += credit * gpa;
     });
+
+    if (errorMessage) {
+        document.getElementById("result").innerText = errorMessage;
+        return;
+    }
+
+    if (isNaN(prevCGPA) || isNaN(prevCredits) || prevCredits < 0 || newCredits <= 0) {
+        document.getElementById("result").innerText = "Please enter valid completed credits, previous CGPA, and course info.";
+        return;
+    }
 
     const updatedCGPA = ((prevCGPA * prevCredits) + totalGradePoints) / (prevCredits + newCredits);
     document.getElementById("result").innerText = isNaN(updatedCGPA)
